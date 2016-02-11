@@ -1,13 +1,4 @@
 
-
-def alter_quality(item)
-  if item.quality < 50
-    item.quality += 1
-  elsif item.name != "Sulfuras, Hand of Ragnaros"
-    item.quality -= 1
-  end
-end
-
 <<-EOF
 
 INCREMENT QUALITY:
@@ -20,6 +11,16 @@ DECREMENT QUALITY:
 > item.name not equal "Sulfuras, Hand of Ragnaros"
 
 EOF
+
+
+
+def alter_quality(item)
+  if item.quality < 50
+    item.quality += 1
+  elsif item.name != "Sulfuras, Hand of Ragnaros"
+    item.quality -= 1
+  end
+end
 
 
 def update_quality(items)
@@ -35,10 +36,8 @@ def update_quality(items)
       if item.quality < 50
         alter_quality(item)
         if item.name == 'Backstage passes to a TAFKAL80ETC concert'
-          if item.sell_in < 11
-            if item.quality < 50
-              alter_quality(item)
-            end
+          if item.sell_in < 11 && item.quality < 50
+            alter_quality(item)
           end
           if item.sell_in < 6
             if item.quality < 50
@@ -48,9 +47,13 @@ def update_quality(items)
         end
       end
     end
+
+
     if item.name != 'Sulfuras, Hand of Ragnaros'
       item.sell_in -= 1
     end
+
+
     if item.sell_in < 0
       if item.name != "Aged Brie"
         if item.name != 'Backstage passes to a TAFKAL80ETC concert'
@@ -68,6 +71,8 @@ def update_quality(items)
         end
       end
     end
+
+
   end
 end
 
