@@ -1,5 +1,30 @@
+
+
+def alter_quality(item)
+  if item.quality < 50
+    item.quality += 1
+  elsif item.name != "Sulfuras, Hand of Ragnaros"
+    item.quality -= 1
+  end
+end
+
+<<-EOF
+
+INCREMENT QUALITY:
+-------------------
+> item.quality < 50
+
+
+DECREMENT QUALITY:
+-------------------
+> item.name not equal "Sulfuras, Hand of Ragnaros"
+
+EOF
+
+
 def update_quality(items)
   items.each do |item|
+
     if item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert'
       if item.quality > 0
         if item.name != 'Sulfuras, Hand of Ragnaros'
@@ -8,16 +33,16 @@ def update_quality(items)
       end
     else
       if item.quality < 50
-        item.quality += 1
+        alter_quality(item)
         if item.name == 'Backstage passes to a TAFKAL80ETC concert'
           if item.sell_in < 11
             if item.quality < 50
-              item.quality += 1
+              alter_quality(item)
             end
           end
           if item.sell_in < 6
             if item.quality < 50
-              item.quality += 1
+              alter_quality(item)
             end
           end
         end
@@ -39,7 +64,7 @@ def update_quality(items)
         end
       else
         if item.quality < 50
-          item.quality += 1
+          alter_quality(item)
         end
       end
     end
